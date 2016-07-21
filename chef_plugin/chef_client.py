@@ -563,7 +563,7 @@ class ChefSoloManager(ChefManager):
         else:
             ctx.logger.info("Downloading Chef cookbooks from {0} to {1}"
                             .format(cc['cookbooks'], file_name))
-            data = requests.get(cc['cookbooks']).content
+            data = requests.get(cc['cookbooks'], stream=True).raw.read()
             self._sudo_write_file(file_name, data)
 
     def _get_cmd(self, runlist):
